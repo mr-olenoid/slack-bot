@@ -1,4 +1,5 @@
 import requests
+import random
 
 def drink_maker(ingredients, image_url):
     return{
@@ -57,4 +58,26 @@ def get_random_drink():
     response = requests.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
     data = response.json()
     return response_data_combiner(data['drinks'])
-#print(get_named_cocktail("margarita"))
+
+def get_drinks_by_id(id_list):
+    all_drinks = []
+    for drink_id in id_list:
+        response = requests.get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=%s' % drink_id['idDrink'])
+        data = response.json()
+        all_drinks.append(data['drinks'][0])
+    return response_data_combiner(all_drinks)
+
+def get_by_ingredient(name):
+    response = requests.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=%s' % name)
+    data = response.json()
+    random.shuffle(data['drinks'])
+    if len(data['drinks']) < 3:
+        coctails_to_get = data['drinks'][:len(data['drinks'])]
+    else:
+        coctails_to_get = data['drinks'][:3]
+    
+    return get_drinks_by_id(coctails_to_get)
+
+
+
+print(get_by_ingredient('gin'))
