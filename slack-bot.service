@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve myproject
+After=network.target
+
+[Service]
+User=nodeadm
+Group=www-data
+WorkingDirectory=/home/nodeadm/slack-bot
+Environment="PATH=/home/nodeadm/slack-bot/.env/bin"
+ExecStart=/home/nodeadm/slack-bot/.env/bin/uwsgi --ini slack-bot.ini
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+server {
+    listen 443 ssl;
+    server_name kube.in.ua;
+
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/home/nodeadm/slack-bot/slack-bot.sock;
+    }
+}

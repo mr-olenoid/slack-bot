@@ -26,12 +26,12 @@ def reaction_added(event_data):
     if text_data[1] == "how" and text_data[2] == "to":
         drink_name = ' '.join(map(str, text_data[3:]))
         drink_name = drink_name.replace('*', '')
-        slack_client.chat_postMessage(channel=channel, blocks=coctails.get_named_cocktail(drink_name), text=drink_name)   
+        slack_client.chat_postMessage(channel=channel, blocks=coctails.get_named_cocktail(drink_name), text=drink_name)
     if text_data[1] == "random" and text_data[2] == "drink":
         slack_client.chat_postMessage(channel=channel, blocks=coctails.get_random_drink(), text="random")
     if text_data[1] == "drink" and text_data[2] == "with":
         ingridient_name = ' '.join(map(str, text_data[3:]))
-        ingridient_name = drink_name.replace('*', '')
+        ingridient_name = ingridient_name.replace('*', '')
         slack_client.chat_postMessage(channel=channel, blocks=coctails.get_by_ingredient(ingridient_name), text=ingridient_name)
 
 
