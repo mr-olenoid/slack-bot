@@ -5,10 +5,15 @@ import json
 from slack import WebClient
 from slackeventsapi import SlackEventAdapter
 
+
+
+with open('config.json', 'r') as myfile:
+    config=json.loads(myfile.read())
+
 # Your app's Slack bot user token
-SLACK_BOT_TOKEN = "xoxb-1255022124497-1262254771092-h1QhPerdXBKDgWLdzhvwSQHh"
-SLACK_VERIFICATION_TOKEN = "4v91KH2NgfG9QAXcP62wUmzN"
-SLACK_SIGNING_SECRET = "0af6322b563ff0e37ab0b6f41975cae2"
+SLACK_BOT_TOKEN = config["SLACK_BOT_TOKEN"]
+SLACK_VERIFICATION_TOKEN = config["SLACK_VERIFICATION_TOKEN"]
+SLACK_SIGNING_SECRET = config["SLACK_SIGNING_SECRET"]
 
 slack_client = WebClient(SLACK_BOT_TOKEN)
 app = Flask(__name__)
@@ -126,4 +131,5 @@ attachments_json = [
 
 # Start the Flask server
 if __name__ == "__main__":
-    app.run(ssl_context=('cert.pem', 'key.pem'), host='0.0.0.0', port=443)
+    app.run(port=6000)
+    #app.run(ssl_context=('cert.pem', 'key.pem'), host='0.0.0.0', port=443)

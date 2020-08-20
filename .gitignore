@@ -3,3 +3,4 @@ __pycache__
 .vscode
 slack_events_for_drink.py
 slack_interactive.py
+app/config.json
