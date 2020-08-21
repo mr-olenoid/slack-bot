@@ -26,7 +26,7 @@ def reaction_added(event_data):
     event = event_data["event"]
     print(event)
     channel = event["channel"]
-    text_data = event['text'].split()
+    text_data = event['text'].lower().split()
     print(text_data)
     if text_data[1] == "how" and text_data[2] == "to":
         drink_name = ' '.join(map(str, text_data[3:]))
